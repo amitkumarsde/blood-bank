@@ -1,0 +1,49 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# ---------------------------------------------------------------------------
+# Frontend (Next.js)
+# ---------------------------------------------------------------------------
+frontend/node_modules
+frontend/.next/
+frontend/out/
+frontend/build
+frontend/.vercel
+frontend/*.tsbuildinfo
+frontend/next-env.d.ts
+frontend/.pnp
+frontend/.pnp.*
+
+# ---------------------------------------------------------------------------
+# Backend (Core PHP)
+# ---------------------------------------------------------------------------
+# Secrets live in backend/.env (also covered by the .env rules below).
+backend/.env
+
+# ---------------------------------------------------------------------------
+# Environment files (opt-in for committing if needed)
+# ---------------------------------------------------------------------------
+.env
+.env.*
+*.env
+# ...but DO commit the template so others know which keys to set.
+!.env.example
+!backend/.env.example
+
+# ---------------------------------------------------------------------------
+# Misc / OS / editors
+# ---------------------------------------------------------------------------
+.DS_Store
+Thumbs.db
+*.pem
+/coverage
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Editors
+.idea/
+.vscode/
+*.swp

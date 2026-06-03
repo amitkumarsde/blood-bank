@@ -1,0 +1,21 @@
+# Apache config — only needed when running under Apache (e.g. XAMPP htdocs).
+# With PHP's built-in server (php -S localhost:8080 app.php) this file is ignored.
+
+RewriteEngine On
+
+# Send every request that is NOT a real file to app.php (the front controller),
+# so all routing happens in one place.
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.php [QSA,L]
+
+# Some Apache setups drop the Authorization header; this re-exposes it to PHP
+# so JWT auth keeps working.
+RewriteCond %{HTTP:Authorization} .
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+# Security: never serve the .env file (it holds DB password + JWT secret),
+# even if someone requests it directly in the browser.
+<Files ".env">
+    Order allow,deny
+    Deny from all
+</Files>
