@@ -25,5 +25,12 @@ function load_env(string $path): void
 
 function env(string $key, string $default = ''): string
 {
+    // Real environment variables (e.g. set in the Render dashboard) come first.
+    $value = getenv($key);
+    if ($value !== false) {
+        return $value;
+    }
+
+    // Fall back to values loaded from the local .env file.
     return $_ENV[$key] ?? $default;
 }
