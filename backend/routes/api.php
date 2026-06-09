@@ -5,7 +5,11 @@
 
 $method = $_SERVER['REQUEST_METHOD'];
 
-$uriPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+// Strip the query string, then collapse any run of slashes into one.
+// (A leading "//" would otherwise make parse_url treat the next segment as a
+// hostname, dropping it from the path — e.g. "//api/samples" => "/samples".)
+$uriPath = strtok($_SERVER['REQUEST_URI'], '?');
+$uriPath = preg_replace('#/+#', '/', $uriPath);
 
 $scriptDir = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'])), '/');
 if ($scriptDir !== '' && str_starts_with($uriPath, $scriptDir)) {

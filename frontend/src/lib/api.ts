@@ -1,4 +1,9 @@
-export const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080";
+// Strip any trailing slash so joining with a leading-slash path never
+// produces a double slash (e.g. ".../" + "/api/samples" => "...//api/samples"),
+// which some servers misparse as a protocol-relative URL.
+export const API_URL = (
+    process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080"
+).replace(/\/+$/, "");
 
 export type Role = "hospital" | "receiver";
 
