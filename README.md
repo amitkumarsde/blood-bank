@@ -51,8 +51,6 @@ Get-Content sql/database.sql | mysql -u root -p
 
 # 2. Create your .env from the template and fill in real values:
 cp .env.example .env
-#   DB_USER / DB_PASS  -> your MySQL login
-#   JWT_SECRET         -> any long random string
 
 # 3. Start the API on port 8080 (index.php is the single entry point):
 php -S localhost:8080 index.php
